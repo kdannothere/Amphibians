@@ -38,7 +38,7 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<Amphibian>?) {
  * displays a broken image to reflect the connection error.  When the request is finished, it
  * hides the image view.
  */
-@BindingAdapter("apiStatus")
+@BindingAdapter("amphibianApiStatus")
 fun bindStatus(statusImageView: ImageView, status: AmphibianApiStatus?) {
     when(status) {
         AmphibianApiStatus.LOADING -> {

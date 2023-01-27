@@ -15,24 +15,41 @@
  */
 package com.example.amphibians.ui
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.amphibians.network.Amphibian
+import com.example.amphibians.network.AmphibianApi
+import kotlinx.coroutines.launch
 
 enum class AmphibianApiStatus {LOADING, ERROR, DONE}
 
 class AmphibianViewModel : ViewModel() {
 
-    // TODO: Create properties to represent MutableLiveData and LiveData for the API status
+    private val _amphibianApiStatus = MutableLiveData<AmphibianApiStatus>()
+    val amphibianApiStatus: LiveData<AmphibianApiStatus> get() = _amphibianApiStatus
 
-    // TODO: Create properties to represent MutableLiveData and LiveData for a list of amphibian objects
+    private val _amphibianList = MutableLiveData<List<Amphibian>>()
+    val amphibianList: LiveData<List<Amphibian>> get() = _amphibianList
 
-    // TODO: Create properties to represent MutableLiveData and LiveData for a single amphibian object.
-    //  This will be used to display the details of an amphibian when a list item is clicked
+    private val _currentAmphibian = MutableLiveData<Amphibian>()
+    val currentAmphibian: LiveData<Amphibian> get() = _currentAmphibian
 
-    // TODO: Create a function that gets a list of amphibians from the api service and sets the
-    //  status via a Coroutine
+    fun getAmphibiansList() {
+        viewModelScope.launch {
+            _amphibianApiStatus.value = AmphibianApiStatus.LOADING
+            try {
+                _amphibianList.value = AmphibianApi.retrofitService.getAmphibians()
+                _amphibianApiStatus.value = AmphibianApiStatus.DONE
+            } catch (e: Exception) {
+                _amphibianApiStatus.value = AmphibianApiStatus.ERROR
+                _amphibianList.value = listOf()
+            }
+        }
+    }
 
     fun onAmphibianClicked(amphibian: Amphibian) {
-        // TODO: Set the amphibian object
+        _currentAmphibian.value = amphibian
     }
 }
