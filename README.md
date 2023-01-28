@@ -4,5 +4,5 @@ The app will get its data from a custom API for this project and display it in a
 [Download application](apk/Amphibians.apk)
 
 
-![alt text](apk/Screenshot_1.jpg)
-![alt text](apk/Screenshot_2.jpg)
+![alt text](apk/Screenshot_1.png)
+![alt text](apk/Screenshot_2.png)
