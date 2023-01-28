@@ -21,13 +21,13 @@ plugins {
 }
 
 android {
-    compileSdkVersion 33
+    compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.amphibians"
         minSdkVersion 21
-        targetSdkVersion 33
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -51,7 +51,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    namespace 'com.example.amphibians'
 }
 
 dependencies {
